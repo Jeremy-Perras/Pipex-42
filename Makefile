@@ -6,7 +6,7 @@
 #    By: jperras <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 09:41:47 by jperras           #+#    #+#              #
-#    Updated: 2022/03/23 16:54:40 by jperras          ###   ########.fr        #
+#    Updated: 2022/03/23 17:11:26 by jperras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 SRCS = pipex.c
@@ -26,18 +26,18 @@ LIBPF = -L printf -lftprintf
 .c.o:
 		${CC} ${FLAGS} ${INCLUDES} -c $< -o ${<:.c=.o}
 
-$NAME: ${OBJS}
+${NAME}: ${OBJS}
 	make -C printf
 	${CC} ${FLAGS} -o ${NAME} ${LIBPF} ${INCLUDES} ${OBJS}
 
 debug:
 	make -C printf
-	${CC} ${FLAGS} -o ${NAME} ${LIBPF} ${INCLUDES} ${SRCS}
+	${CC} ${FLAGS} -g -o ${NAME} ${LIBPF} ${INCLUDES} ${SRCS}
+	lldb ./pipex
 
 all: ${NAME}
 
 clean:
-	echo ${OBJS}
 	make clean -C printf
 	rm -rf ${OBJS}
 

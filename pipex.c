@@ -6,11 +6,11 @@
 /*   By: jperras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:27:39 by jperras           #+#    #+#             */
-/*   Updated: 2022/03/23 16:56:22 by jperras          ###   ########.fr       */
+/*   Updated: 2022/03/24 15:52:25 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
-
+/*
 void	run_pipe(void)
 {
 	int const	READ_END = 0;
@@ -61,6 +61,7 @@ int main(void)
 	pid_t	child = -1;
 	
 	child = fork();
+	printf("%d",child);
 	switch((int)child)
 	{
 		case -1:
@@ -73,4 +74,32 @@ int main(void)
 	}
 	wait(NULL);
 	return (0);
+}*/
+#include <stdio.h>
+int	main(int argc, char **argv, char **env)
+{
+	(void) argc;
+	(void) argv;
+	char	*argv1[4];
+	pid_t	father = -1;
+
+	argv1[0]="/bin/ls";
+	argv1[1]="-a";
+	argv1[2]="-l";
+	argv1[3]=NULL;
+
+	father = fork();
+	while(*teste++)
+		printf("%s\n",*teste);
+	while(*env++)
+		printf("%s\n",*env);
+	if (father > 0)
+	{
+	 printf("%s",env[0]);
+	}
+	if (father == 0)
+	{
+		execve("/bin/ls", argv1, NULL);
+		printf("test2\n");
+	}
 }
