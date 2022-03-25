@@ -1,26 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jperras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 14:33:46 by jperras           #+#    #+#             */
-/*   Updated: 2022/03/25 16:55:40 by jperras          ###   ########.fr       */
+/*   Created: 2022/03/25 09:39:56 by jperras           #+#    #+#             */
+/*   Updated: 2022/03/25 13:08:24 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
-# include <unistd.h>
-# include "printf/includes/ft_printf.h"
-# include <string.h>
-# include <stdio.h>
-# include <sys/wait.h>
-# include <stdlib.h>
-# include <fcntl.h>
 
-char	**ft_split(char const *s, char c);
-char	*ft_strjoin(const char *s1, const char *s2);
-int		ft_strncmp(const char *s1, const char *s2, size_t i);
-#endif

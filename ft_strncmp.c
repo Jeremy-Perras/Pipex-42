@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jperras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 14:33:46 by jperras           #+#    #+#             */
-/*   Updated: 2022/03/25 16:55:40 by jperras          ###   ########.fr       */
+/*   Created: 2022/02/22 08:38:35 by jperras           #+#    #+#             */
+/*   Updated: 2022/03/25 14:08:39 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "pipex.h"
 
-#ifndef PIPEX_H
-# define PIPEX_H
-# include <unistd.h>
-# include "printf/includes/ft_printf.h"
-# include <string.h>
-# include <stdio.h>
-# include <sys/wait.h>
-# include <stdlib.h>
-# include <fcntl.h>
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{	
+	size_t			i;
+	unsigned char	*str;
+	unsigned char	*str2;
 
-char	**ft_split(char const *s, char c);
-char	*ft_strjoin(const char *s1, const char *s2);
-int		ft_strncmp(const char *s1, const char *s2, size_t i);
-#endif
+	i = 0;
+	str = (unsigned char *) s1;
+	str2 = (unsigned char *) s2;
+	if (n == 0)
+		return (0);
+	while (str[i] == str2[i] && str[i] != '\0' && str2[i] != '\0' && i < n - 1)
+		i++;
+	return (str[i] - str2[i]);
+}

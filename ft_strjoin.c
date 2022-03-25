@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jperras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 14:33:46 by jperras           #+#    #+#             */
-/*   Updated: 2022/03/25 16:55:40 by jperras          ###   ########.fr       */
+/*   Created: 2022/02/22 17:15:25 by jperras           #+#    #+#             */
+/*   Updated: 2022/03/25 14:05:46 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "pipex.h"
 
-#ifndef PIPEX_H
-# define PIPEX_H
-# include <unistd.h>
-# include "printf/includes/ft_printf.h"
-# include <string.h>
-# include <stdio.h>
-# include <sys/wait.h>
-# include <stdlib.h>
-# include <fcntl.h>
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		i;
+	int		j;
+	char	*str;
 
-char	**ft_split(char const *s, char c);
-char	*ft_strjoin(const char *s1, const char *s2);
-int		ft_strncmp(const char *s1, const char *s2, size_t i);
-#endif
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+		i++;
+	while (s2[j] != '\0')
+		j++;
+	str = malloc((i + j + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	return (str);
+}

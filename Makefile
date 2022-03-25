@@ -6,10 +6,10 @@
 #    By: jperras <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 09:41:47 by jperras           #+#    #+#              #
-#    Updated: 2022/03/23 17:11:26 by jperras          ###   ########.fr        #
+#    Updated: 2022/03/25 14:07:11 by jperras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-SRCS = pipex.c
+SRCS = pipex.c ft_split.c ft_strjoin.c ft_strncmp.c
 
 NAME = pipex
 
