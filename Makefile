@@ -6,16 +6,20 @@
 #    By: jperras <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 09:41:47 by jperras           #+#    #+#              #
-#    Updated: 2022/03/25 14:07:11 by jperras          ###   ########.fr        #
+#    Updated: 2022/03/26 13:11:13 by jperras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-SRCS = pipex.c ft_split.c ft_strjoin.c ft_strncmp.c
+SRCS = pipex.c ft_split.c ft_strjoin.c ft_strncmp.c pipex_utils.c
+
+SRCSB = xpipex.c ft_split.c ft_strjoin.c ft_strncmp.c xpipex_utils.c
 
 NAME = pipex
 
 INCLUDES = -I./includes
 
 OBJS = ${SRCS:.c=.o}
+
+OBJSB = ${SRCSB:.c=.o}
 
 CC = gcc
 
@@ -30,16 +34,20 @@ ${NAME}: ${OBJS}
 	make -C printf
 	${CC} ${FLAGS} -o ${NAME} ${LIBPF} ${INCLUDES} ${OBJS}
 
+bonus: ${OBJSB}
+	make -C printf
+	${CC} ${FLAGS} -o ${NAME} ${LIBPF} ${INCLUDES} ${OBJSB}
+
 debug:
 	make -C printf
-	${CC} ${FLAGS} -g -o ${NAME} ${LIBPF} ${INCLUDES} ${SRCS}
+	${CC} ${FLAGS} -g -o ${NAME} ${LIBPF} ${INCLUDES} ${SRCSB}
 	lldb ./pipex
 
 all: ${NAME}
 
 clean:
 	make clean -C printf
-	rm -rf ${OBJS}
+	rm -rf ${OBJS} ${OBJSB}
 
 
 fclean: clean

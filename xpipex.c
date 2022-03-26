@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   xpipex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jperras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 09:38:43 by jperras           #+#    #+#             */
-/*   Updated: 2022/03/26 11:43:00 by jperras          ###   ########.fr       */
+/*   Updated: 2022/03/26 18:07:15 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "pipex.h"
+#include "xpipex.h"
 
 static char	**ft_path(char **env)
 {
@@ -60,50 +60,61 @@ char	*ft_cmd(char *comd, char **env)
 	exit(1);
 }
 
-static void	pipex(char **argv, char **env, int fdin, int fdout)
+static void	pipex(char **argv, char **env, int *i)
 {
 	pid_t	parent;
 	int		end[2];
+	int		j;
+	int		fd;
 
-	pipe(end);
-	parent = fork();
-	if (parent < 0)
+	j = 2;
+	fd = 0;
+	while (j < i[2] - 1)
 	{
-		close(end[0]);
-		close(end[1]);
-		write(2, "Fork error\n", 11);
-		exit(1);
+		pipe(end);
+		parent = fork();
+		if (!parent)
+		{
+			dup2(fd, STDIN_FILENO);
+			if (j < i[2] - 2)
+				dup2(end[1], STDOUT_FILENO);
+			ft_child_process(argv[j], env, end);
+		}
+		else
+			ft_parent_process(end, &fd);
+		j++;
 	}
-	if (!parent)
+}
+
+static void	ft_open(char **argv, int *fdin)
+{
+	if (access(argv[1], F_OK) == 0)
+		*fdin = open(argv[1], O_RDONLY);
+	else
 	{
-		close(fdout);
-		ft_child_process(argv, env, end);
+		write(2, "Error access fdin\n", 18);
+		exit (1);
 	}
-	close(fdin);
-	wait(NULL);
-	ft_parent_process(argv, env, end);
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	int	fdin;
 	int	fdout;
+	int	i[3];
 
-	if (argc == 5)
+	if (argc >= 5)
 	{
-		if (access(argv[1], F_OK) == 0)
-			fdin = open(argv[1], O_RDONLY);
-		else
-		{
-			write(2, "Error access fdin\n", 18);
-			return (1);
-		}
-		fdout = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+		ft_open(argv, &fdin);
+		fdout = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if (fdin < 0 || fdout < 0)
 			return (1);
 		dup2(fdin, STDIN_FILENO);
 		dup2(fdout, STDOUT_FILENO);
-		pipex(argv, env, fdin, fdout);
+		i[0] = fdin;
+		i[1] = fdout;
+		i[2] = argc;
+		pipex(argv, env, i);
 	}
 	else
 		write(2, "Invalid arguments\n", 18);
