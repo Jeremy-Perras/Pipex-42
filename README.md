@@ -1,7 +1,7 @@
 # Pipex-42
 
 ## Table of content :
-* [What is printf ?](#what-is-pipex-)
+* [What is Pipex ?](#what-is-pipex-)
 * [How does is work ?](#how-does-is-work-)
 
 ### What is pipex ?
