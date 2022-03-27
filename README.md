@@ -15,6 +15,7 @@
 ### How does is work ?
 The Makefile contain 4 rules : all clean fclean and re.
 Make create a program called pipex.
->$> ./pipex < file1 cmd1 | cmd2 > file2. 
+>$> ./pipex < file1 cmd1 | cmd2 > file2.
+
 Make bonus create a program called pipex.
 > $> ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
